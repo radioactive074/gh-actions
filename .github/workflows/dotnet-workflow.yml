@@ -1,0 +1,29 @@
+name: .NET Core Build and Test
+
+on:
+  push:
+    branches:
+       - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: .NET Setup
+        uses: actions/setup-dotnet@v4 
+        with: 
+          dotnet-version: '3.1'
+
+      - name: Restore Dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build -c Release
+
+      - name: Test
+        run: dotnet test
+        
+    
